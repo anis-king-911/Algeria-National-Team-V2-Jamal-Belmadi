@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .div {
+      width: 100px;
+      height: 100px;
+      display: block;
+      background: #0087FF;
+    }
+  </style>
+</head>
+<body>
+  
+  <div class="div"></div>
+  <button>hide</button>
+  <script>
+    const hide = (element)=> { return element.style.display = 'none' }
+    const show = (element)=> { return element.style.display = 'block' }
+    
+    const btn = document.querySelector('button')
+    const div = document.querySelector('.div')
+    
+    btn.addEventListener('click', ()=> {
+      if(btn.textContent != 'hide') {
+        show(div)
+        
+        btn.textContent = 'hide'
+      } else
+      if(btn.textContent != 'show') {
+        hide(div)
+        
+        btn.textContent = 'show'
+      }
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<style>
+body {
+  font-size: 12px;
+}
+
+
+.css {
+  background-color: #2196F3;
+  color: #fff;
+  text-align: center;
+  display: none;
+}
+
+.show {
+  display: block;
+}
+
+.container {
+  display: grid;
+  grid-gap: 4px;
+  padding: 4px;
+  background: #FFACAC;
+  border-radius: 4px;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+/* Style the buttons */
+.btn {
+  border: none;
+  outline: none;
+  padding: 12px 16px;
+  cursor: pointer;
+}
+
+.btn.active {
+  background-color: #666;
+  color: white;
+}
+</style>
+<body>
+
+<h2>Filter DIV Elements</h2>
+
+<div id="myBtnContainer">
+  <button class="btn active" onclick="filterSelection('all')"> Show all</button>
+  <button class="btn" onclick="filterSelection('filter')"> Cars</button>
+  <button class="btn" onclick="filterSelection('Div')"> Animals</button>
+  <button class="btn" onclick="filterSelection('filter Div')"> Animals</button>
+</div>
+
+<div class="container">
+  <div data-filter="filter" class="css">filter 1</div>
+  <div data-filter="filter" class="css">filter 2</div>
+  <div data-filter="Div" class="css">Div 1</div>
+  <div data-filter="filter Div" class="css">filter Div 1</div>
+  <div data-filter="Div" class="css">Div 2</div>
+  <div data-filter="filter Div" class="css">filter Div 2</div>
+  <div data-filter="filter Div" class="css">filter Div 3</div>
+  <div data-filter="filter" class="css">filter 3</div>
+  <div data-filter="filter" class="css">filter 4</div>
+  <div data-filter="filter" class="css">filter 5</div>
+  <div data-filter="filter Div" class="css">filter Div 4</div>
+  <div data-filter="filter" class="css">filter 6</div>
+  <div data-filter="Div" class="css">Div 3</div>
+</div>
+
+<script>
+
+`
+  <button onclick="filterSelection('${arg.Name}')" class="css">
+    ${arg.Name}
+  </button>
+`
+
+
+
+function filterSelection(c) {
+  var x, i;
+  x = document.querySelectorAll(".css");
+  if (c == "all") c = "";
+  for (i = 0; i < x.length; i++) {
+    w3RemoveClass(x[i], "show");
+    if (x[i].getAttribute("data-filter").indexOf(c) > -1) w3AddClass(x[i], "show");
+  }
+}
+
+function w3AddClass(element, name) {
+  var i, arr1, arr2;
+  arr1 = element.className.split(" ");
+  arr2 = name.split(" ");
+  for (i = 0; i < arr2.length; i++) {
+    if (arr1.indexOf(arr2[i]) == -1) {element.className += " " + arr2[i];}
+  }
+}
+
+function w3RemoveClass(element, name) {
+  var i, arr1, arr2;
+  arr1 = element.className.split(" ");
+  arr2 = name.split(" ");
+  for (i = 0; i < arr2.length; i++) {
+    while (arr1.indexOf(arr2[i]) > -1) {
+      arr1.splice(arr1.indexOf(arr2[i]), 1);     
+    }
+  }
+  element.className = arr1.join(" ");
+}
+
+// Add active class to the current button (highlight it)
+var btnContainer = document.getElementById("myBtnContainer");
+var btns = btnContainer.querySelectorAll(".btn");
+
+for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener("click", function(){
+    var current = document.querySelectorAll(".active");
+    current[0].className = current[0].className.replace(" active", "");
+    this.className += " active";
+  });
+}
+
+filterSelection("all")
+
+window.addEventListener('load', ()=> {
+  
+})
+</script>
+
+</body>
+</html>
