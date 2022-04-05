@@ -24,7 +24,7 @@ export const LoadData = (table)=> {
         const TimeFunc = GetReversedTime(data.Time);
 
         if(data.Coach === 'Jamal Belmadi') {
-          table.innerHTML += DataForm(data, TimeFunc, key);
+          table.innerHTML = DataForm(data, TimeFunc, key) + table.innerHTML;
         }
         
       })
